@@ -1,0 +1,38 @@
+// Connections:
+/*
+ Wiring Connections (Without Resistor)
+1️⃣ MQ-2 Gas Sensor (Detects Gas Leakage)
+VCC → 5V (Arduino)
+
+GND → GND (Arduino)
+
+A0 → A0 (Arduino)
+
+2️⃣ Buzzer (Alarm)
+Positive (+) → D6 (Arduino)
+
+Negative (-) → GND (Arduino)
+
+3️⃣ Servo Motor (Valve Control)
+VCC (Red wire) → 5V (Arduino)
+
+GND (Black wire) → GND (Arduino)
+
+Signal (Yellow/White wire) → D9 (Arduino)
+
+4️⃣ IRF540N MOSFET (Fan Control, No Resistor)
+Gate (G) → D5 (Arduino) (Direct Connection, No Resistor)
+
+Drain (D) → Negative Terminal of Exhaust Fan
+
+Source (S) → GND (Arduino & Power Supply)
+
+5️⃣ Exhaust Fan (Ventilation)
+Positive (+) Terminal → External Power Supply (5V or 12V)
+
+Negative (-) Terminal → MOSFET Drain (D)
+
+6️⃣ Power Connections
+Arduino 5V → Sensor & Servo Power
+
+Arduino GND → Sensor, Servo, Fan, and MOSFET Source */
