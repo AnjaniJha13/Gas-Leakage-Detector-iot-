@@ -1,0 +1,40 @@
+// Source Code
+#include <Servo.h>
+
+#define MQ2_A0 A0    // MQ-2 Gas Sensor Analog Pin
+#define BUZZER 6     // Buzzer pin
+#define FAN 5        // Fan control via MOSFET Gate
+#define SERVO_PIN 9  // Servo motor pin
+
+Servo servoMotor;
+int gasThreshold = 300; // Adjust based on sensor readings
+
+void setup() {
+    pinMode(MQ2_A0, INPUT);
+    pinMode(BUZZER, OUTPUT);
+    pinMode(FAN, OUTPUT);
+    
+    servoMotor.attach(SERVO_PIN);
+    servoMotor.write(0); // Initial position
+
+    Serial.begin(9600);
+}
+
+void loop() {
+    int gasValue = analogRead(MQ2_A0);
+    Serial.print("Gas Level: ");
+    Serial.println(gasValue);
+
+    if (gasValue > gasThreshold) {
+        digitalWrite(BUZZER, HIGH);  // Turn ON buzzer
+        digitalWrite(FAN, HIGH);     // Turn ON fan
+        servoMotor.write(90);        // Rotate servo to 90° (close valve)
+        Serial.println("⚠ Gas Leak Detected! Fan and Alarm ON!");
+    } else {
+        digitalWrite(BUZZER, LOW);
+        digitalWrite(FAN, LOW);
+        servoMotor.write(0); // Reset valve
+    }
+
+    delay(1000); // Check gas levels every second
+}
